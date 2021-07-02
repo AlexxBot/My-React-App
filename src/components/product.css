@@ -1,0 +1,21 @@
+.table {
+    border: 1px solid black;
+    margin:20px;
+    padding: 20px;
+    border-radius: 2%;
+}
+
+.header {
+    background-color: gainsboro; 
+}
+
+.header td{
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.body td{
+    padding: 5px;
+}

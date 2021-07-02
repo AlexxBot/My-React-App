@@ -4,6 +4,8 @@ import { Component, useEffect, useState } from 'react';
 
 import Routes  from './routes'
 
+import { LoginProvider } from './context/login-context'
+
 //const ENDPOINT = 'http://192.168.100.59:4000';
 
 /* function App() {
@@ -27,8 +29,14 @@ import Routes  from './routes'
 
 function App() {
 
+  //aqui podria estar el login u setLogin en usestate pero como no es buena practica se usa el providr logn
+  
+
   return (
+    <LoginProvider>
       <Routes/>
+    </LoginProvider>
+      
 
     
   )

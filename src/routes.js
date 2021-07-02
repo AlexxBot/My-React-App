@@ -2,12 +2,13 @@ import { Route, BrowserRouter as Router, Link, Switch } from 'react-router-dom'
 
 import Login from './components/login'
 import Products from './components/products'
+import Menu from './components/menu'
 
 const Routes = () => {
     return (
         <Router>
             <div>
-                <nav>
+                {/* <nav className="Menu">
                     <ul>
                         <li>
                             <Link to="/">Login</Link>
@@ -16,7 +17,8 @@ const Routes = () => {
                             <Link to="/products">Products</Link>
                         </li>
                     </ul>
-                </nav>
+                </nav> */}
+                <Menu/>
             
                 <Switch>
                     <Route exact={true} path="/">

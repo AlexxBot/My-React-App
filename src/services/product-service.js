@@ -1,13 +1,14 @@
 import { URL, HEADERS } from '../global'
 
-export default class ProductService{
+const URL_PRODUCT = `${URL}/products` 
+class ProductService{
     
     constructor(){
         //URL = 'http://192.168.100.59:3000/product'  
     }
 
-    getProductos = async () => {
-        return fetch(URL) 
+    getProducts = async () => {
+        return fetch(URL_PRODUCT) 
     }
 
     getProduct = async (id) => {
@@ -18,3 +19,7 @@ export default class ProductService{
         return fetch(URL)
     }
 }
+
+const productService = new ProductService()
+
+export default productService

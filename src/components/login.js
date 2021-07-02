@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import { LoginContext } from '../context/login-context'
 import authService from '../services/auth-service'
 
 
@@ -15,13 +16,18 @@ const Login = () => {
     const [form, setForm] = useState(initialForm)
     const [redirect, setRedirect] = useState(false)
 
+    const { setUserLogin } = useContext(LoginContext)
+
     const login = async (e) => {
 
         e.preventDefault();
         var response = await authService.login(form)
-        console.log(response);
+        //console.log(response);
         if (response.status === 200) {
+            console.log(form.email)
+            setUserLogin({email: form.email, isLogged: true})
             setRedirect(true)
+            
         }
 
         /* try {
