@@ -7,7 +7,7 @@ import authService from '../services/auth-service'
 //const authService = new AuthService()
 const initialForm = {
     email: 'alex.hotmail.com',
-    password: 'password'
+    password: 'alex'
 }
 
 
@@ -21,14 +21,14 @@ const Login = () => {
     const login = async (e) => {
 
         e.preventDefault();
-        var response = await authService.login(form)
-        //console.log(response);
-        if (response.status === 200) {
-            console.log(form.email)
-            setUserLogin({email: form.email, isLogged: true})
-            setRedirect(true)
+        var token = await authService.login(form)
+        console.log(token);       
+        console.log(form.email)
+        console.log(`this is the token ${token}`)
+        setUserLogin({email: form.email, isLogged: true, token: token})
+        setRedirect(true)
             
-        }
+        
 
         /* try {
             console.log(`the user ${form.user} want to be logged`)

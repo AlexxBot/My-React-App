@@ -1,21 +1,34 @@
-import { URL , HEADERS } from '../global'
+import { URL, HEADERS } from '../global'
+import axios from 'axios'
 
 
-const URL_AUTH = `${URL}/auth` 
-class AuthService{
-    
-    constructor(){  
-             
+//const URL_AUTH = `${URL}/auth` 
+
+class AuthService {
+
+    constructor() {
+        this.URL_AUTH = `${URL}/auth`
     }
 
-    login = async (form) => {
-        //console.log(form)
-        //console.log('request to ', `${URL_AUTH}/signin`)
-        return await fetch(`${URL_AUTH}/signin`, {
+    login = async (product) => {
+
+        return axios.post(`${this.URL_AUTH}/signin`, product).then((response) => {
+            if(response.status === 200){
+                console.log('status 200')
+                return response.data.token
+            }
+            else{
+                console.log('there is an error trying to get the token')
+                return ''
+            }
+            
+        }).catch((e) => console.log(e))
+        /* return await fetch(`${this.URL_AUTH}/signin`, {
             method: 'Post', 
             headers: HEADERS, 
             body: JSON.stringify(form)
-        })
+        }) */
+
         /* try {
             const response = await fetch('http://localhost:3000/auth/signin', {
                 method: 'Post',
@@ -38,7 +51,7 @@ class AuthService{
             console.log('error', e)
         } */
     }
-    
+
 }
 
 const authService = new AuthService()

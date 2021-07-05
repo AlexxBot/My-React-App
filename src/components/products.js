@@ -2,17 +2,25 @@
 import { useEffect, useState } from 'react'
 import productService from '../services/product-service'
 
-
 import './product.css'
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}
+
+const productInitial = {
+    name: '',
+    category:'',
+    price : '',
+    imgURL:''
+}
 
 const Products = () => {
 
     const [productsState, setProductsState] = useState({ loading: false, products: [] })
+    const [product, setProduct] = useState(productInitial)
 
-    useEffect(async () => {
+    useEffect( async () => { // aca estoy creando una funcion anonima que se llama a si misma dado que el useEffect no permite funciones asyncronas, por lo que hay que comvertirlo a sincrono con then
         setProductsState({ loading: true })
         /* const response = await productService.getProducts();
         console.log(response.status)
@@ -30,9 +38,40 @@ const Products = () => {
         }
     }, [])
 
+    const setParameter = (e) => {
+        setProduct({
+            ...product,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const saveProduct = () => {
+
+    }
+
     return (
         <>
-        <div>
+        <div className='container'>
+            <form onSubmit={saveProduct} className='form'>
+                <label >Name : </label>
+                <input type='text' name='name' onChange={setParameter}/>
+                <br/>
+                <br/>
+
+                <label>Category : </label>               
+                <input type='text' name='category' onChange={setParameter}/>
+                <br/>
+                <br/>
+                <label>Price : </label>
+                <input type='text' name='price' onChange={setParameter}/>
+                <br/>
+                <br/>
+                <label>Image URL : </label>
+                <input type='text' name = 'imgURL' onChange = {setParameter}/>
+                <br/>
+                <br/>
+            </form>
+
             <table className="table">
                 <thead className ="header">
                     <tr >
