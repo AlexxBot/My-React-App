@@ -21,12 +21,10 @@ const Login = () => {
     const login = async (e) => {
 
         e.preventDefault();
-        var token = await authService.login(form)
-        console.log(token);       
-        console.log(form.email)
-        console.log(`this is the token ${token}`)
-        setUserLogin({email: form.email, isLogged: true, token: token})
-        setRedirect(true)
+        var {email, isLogged, token} = await authService.login(form)
+        console.log({email, isLogged, token});       
+        setUserLogin({email: email, isLogged: isLogged, token: token})
+        setRedirect(isLogged)
             
         
 

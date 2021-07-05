@@ -10,16 +10,16 @@ class AuthService {
         this.URL_AUTH = `${URL}/auth`
     }
 
-    login = async (product) => {
+    login = async (form) => {
 
-        return axios.post(`${this.URL_AUTH}/signin`, product).then((response) => {
+        return axios.post(`${this.URL_AUTH}/signin`, form).then((response) => {
             if(response.status === 200){
                 console.log('status 200')
-                return response.data.token
+                return { email: form.email, isLogged: true, token: response.data.token }
             }
-            else{
+            else {
                 console.log('there is an error trying to get the token')
-                return ''
+                return {email: '', isLogged: false, token: ''}
             }
             
         }).catch((e) => console.log(e))
