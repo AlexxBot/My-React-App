@@ -31,14 +31,32 @@ class ProductService{
               'x-access-token': token
             }
         }
-        console.log('URL', this.URL_PRODUCT, 'form ', product, 'config ',config)
+        //console.log('URL', this.URL_PRODUCT, 'form ', product, 'config ',config)
         const response = await axios.post(this.URL_PRODUCT, product, config)        
         if(response.status === 201){
-            console.log('product desde el metodo save ',response.data)
+            //console.log('product desde el metodo save ',response.data)
             return { saved : true, newProduct: response.data}
         }
         else{
             return { saved: false, newProduct: {}}
+        }
+    }
+
+    updateProduct = async (product, token) => {
+
+        const config = {
+            headers: {
+                'x-access-token': token
+            }
+        }
+
+        const response = await axios.put(`${this.URL_PRODUCT}/${product._id}`, product, config)
+        if(response.status === 200){
+            //console.log('product desde el metodo update ',response.data)
+            return { updated : true, updatedProduct: response.data}
+        }
+        else{
+            return { updated: false, updatedProduct: {}}
         }
     }
 
@@ -49,22 +67,22 @@ class ProductService{
             }
         }
         const response = await axios.delete(`${this.URL_PRODUCT}/${idProduct}`, config)
-        return {retrived : response.status === 204?true: false}
+        return {deleted : response.status === 204?true: false}
     }
 
-    retriveProduct = async (idProduct, token) => {
+    retrieveProduct = async (idProduct, token) => {
         const config = {
             headers: {
                 'x-access-token' : token
             }
         }
         const response = await axios.get(`${this.URL_PRODUCT}/${idProduct}`, config)
-        console.log('funcion retrive ',response)
+        //console.log('funcion retrive ',response)
         if(response.status === 200){
-            return { retrived: true, retrivedProduct: response.data}
+            return { retrieved: true, retrievedProduct: response.data}
         }
         else{
-            return { retrived: false, retrivedProduct: {}}
+            return { retrieved: false, retrievedProduct: {}}
         }
         
     }

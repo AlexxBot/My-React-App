@@ -1,8 +1,8 @@
 import { Route, BrowserRouter as Router, Link, Switch } from 'react-router-dom'
 
-import Login from './components/login'
-import Products from './components/products'
-import Menu from './components/menu'
+import Login from './components/login/login'
+import Products from './components/products/products'
+import Menu from './components/menu/menu'
 
 const Routes = () => {
     return (

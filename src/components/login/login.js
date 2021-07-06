@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { LoginContext } from '../context/login-context'
-import authService from '../services/auth-service'
+import { LoginContext } from '../../context/login-context'
+import authService from '../../services/auth-service'
 
 
 //const authService = new AuthService()

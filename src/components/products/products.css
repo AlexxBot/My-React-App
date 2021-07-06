@@ -1,8 +1,8 @@
 .container {
     display :flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     
 }
 
@@ -23,6 +23,24 @@
     border-radius: 2%;
 }
 
+
+.formularioProduct {
+    margin: 20px;
+    padding: 20px;
+    
+    flex-grow: 2;
+
+}
+
+/* Busqueda*/
+.tabla {
+    padding: 20px;
+    margin:20px;
+    
+    flex-grow: 3;
+}
+
+
 .header {
     background-color: gainsboro; 
 }
@@ -37,5 +55,6 @@
 .body td{
     padding: 5px;
 }
+
 
 
