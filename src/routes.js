@@ -2,6 +2,8 @@ import { Route, BrowserRouter as Router, Link, Switch } from 'react-router-dom'
 
 import Login from './components/login/login'
 import Products from './components/products/products'
+import Transmitir from './components/transmitir/transmitir'
+import Visualizar from './components/visualizar/visualizar'
 import Menu from './components/menu/menu'
 
 const Routes = () => {
@@ -26,6 +28,14 @@ const Routes = () => {
                     </Route>
                     <Route path="/products">
                         <Products />
+                    </Route>
+
+                    <Route path="/transmitir">
+                        <Transmitir />
+                    </Route>
+
+                    <Route path="/visualizar">
+                        <Visualizar />
                     </Route>
                     
                 </Switch>

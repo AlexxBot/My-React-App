@@ -34,6 +34,8 @@ const Menu = () => {
     <Nav className="mr-auto">
       <Nav.Link as={Link} to="/">Login</Nav.Link>
       <Nav.Link as={Link} to="/products">Products</Nav.Link>
+      <Nav.Link as={Link} to="/transmitir">Streaming</Nav.Link>
+      <Nav.Link as={Link} to="/visualizar">Ver</Nav.Link>
       {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -49,7 +51,7 @@ const Menu = () => {
       </Nav.Link>
     </Nav>
   </Navbar.Collapse>
-  <Navbar.Text style= {{ color : 'white', 'font-weight': 'bold'}}>  {userLogin.email}</Navbar.Text>
+  <Navbar.Text style= {{ color : 'white', 'fontWeight': 'bold'}}>  {userLogin.email}</Navbar.Text>
 </Navbar>
 
 )}

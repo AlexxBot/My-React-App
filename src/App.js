@@ -5,7 +5,7 @@ import {useEffect} from 'react';
 import Routes  from './routes'
 
 import { LoginProvider } from './context/login-context'
-import { URL } from './global'
+import { URL_SOCKET } from './global'
 
 const ENDPOINT = 'http://192.168.100.59:4000';
 
@@ -29,11 +29,13 @@ const ENDPOINT = 'http://192.168.100.59:4000';
 
 
 function App() {
-  useEffect(() => {
-    const socket = socketIOClient(URL);
+  /* useEffect(() => {
+    const socket = socketIOClient(URL_SOCKET);
     socket.on('sendId', id => console.log('este es mi socket id', id))
     
-  }, []);
+  }, []); */
+
+  
   //aqui podria estar el login u setLogin en usestate pero como no es buena practica se usa el providr logn
 
 
