@@ -5,6 +5,7 @@ import Products from './components/products/products'
 import Transmitir from './components/transmitir/transmitir'
 import Visualizar from './components/visualizar/visualizar'
 import Menu from './components/menu/menu'
+import Comprar from './components/comprar/comprar'
 
 const Routes = () => {
     return (
@@ -36,6 +37,9 @@ const Routes = () => {
 
                     <Route path="/visualizar">
                         <Visualizar />
+                    </Route>
+                    <Route path="/comprar">
+                        <Comprar />
                     </Route>
                     
                 </Switch>
