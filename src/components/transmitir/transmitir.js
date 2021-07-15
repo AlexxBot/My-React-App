@@ -8,6 +8,7 @@ import { URL_SOCKET } from '../../global'
 
 const socket = io.connect(URL_SOCKET)
 
+
 const Transmitir = () => {
 
     const { userLogin } = useContext(LoginContext)
@@ -15,6 +16,8 @@ const Transmitir = () => {
     const [stream, setStream] = useState()
     const [audio, setAudio] = useState(true)
     const [video, setVideo] = useState(true)
+
+    const [mensajes, setMensajes] = useState([])
 
 
     
@@ -34,6 +37,12 @@ const Transmitir = () => {
         socket.on('sendId', (id) => {
             console.log('this is my socket id', id)
             setSocketId(id)
+        })
+
+        socket.on('receiveMessage', (mensaje) => {
+            const nuevosMensajes = [...mensajes, {from: mensaje.from, mensaje: mensaje.payload}]
+
+            setMensajes(nuevosMensajes)
         })
 
         
@@ -101,6 +110,16 @@ const Transmitir = () => {
                 </div>
                 <div className = 'chat-container'>
                     <h2>Chat</h2>
+
+                    {
+                        mensajes.map((mensaje) => {
+                            <div>
+                                <label>{mensaje.from} :</label>
+                                <label>{mensaje.mensaje}</label>
+                            </div>
+                        })
+                    }
+
                 </div>
                 
             </div>

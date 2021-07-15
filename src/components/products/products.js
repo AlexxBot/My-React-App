@@ -10,7 +10,11 @@ import CloseIcon from '@material-ui/icons/Close'; */
 
 import './products.css'
 
-import { Table, OverlayTrigger, Tooltip , Form, Button} from 'react-bootstrap'
+import { Table, OverlayTrigger, Tooltip , Form as Form2, Button} from 'react-bootstrap'
+
+import Selector from './selector'
+
+import { Formik, Field, Form } from 'formik';
 
 
 
@@ -26,6 +30,13 @@ const productInitial = {
     price: '',
     imgURL: ''
 }
+
+const categories = [
+    { value:'laptop', label:'laptop'},
+    { value:'impresora', label:'impresora'}
+]
+
+
 
 const Products = () => {
 
@@ -147,6 +158,9 @@ const Products = () => {
 
                     <label>Category : </label>               
                     <input type='text' name='category' onChange={setParameter} value = {product.category}/>
+
+                    
+
                     <br/>
                     <br/>
                     <label>Price : </label>
@@ -164,35 +178,102 @@ const Products = () => {
                     <br/>
                 </form> */}
 
-                <Form onSubmit={saveProduct} className='formularioProduct'>
+                <Formik 
+                
+                    initialValues={{
+                        name: '',
+                        category: '',
+                        price: '',
+                        imgURL: ''
+                    }}
+                    validate = {
+                        values => {
+                            const errors = {}
+                            if(!values.name){
+                                errors.name = 'Requerido'
+                            }
+
+                            return errors
+                        }
+                    }
+
+                    onSubmit = {(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 20);
+                        }
+                    }
+                    >
+
+                    {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting,
+                            /* and other goodies */
+                        }) => (
+                
+
+                    <Form>                     
+                        <Field name = 'name'/>
+                        {errors.name}       
+                        
+
+                        <Field name="category">
+                            {({
+                            field, // { name, value, onChange, onBlur }
+                            form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                            meta,
+                            }) => (
+                                <Selector categorias ={categories} titulo ="categorias" {...field}/>  
+                            )}
+                        </Field>   
+                        
+
+                               
+                        <Field name = 'price'/> 
+                        <Field name = 'imgURL'/>    
+                        <button type="submit">
+                            Submit
+                        </button>
+                        </Form>        
+                        )}
+
+                </Formik>
+
+                <Form2 onSubmit={saveProduct} className='formularioProduct'>
                     
-                    <Form.Group controlId="formId">
-                        <Form.Label>ID</Form.Label>
-                        <Form.Control type="text" placeholder="ID" value = {product._id} name = 'id' onChange={setParameter}/>
-                    </Form.Group>
+                    <Form2.Group controlId="formId">
+                        <Form2.Label>ID</Form2.Label>
+                        <Form2.Control type="text" placeholder="ID" value = {product._id} name = 'id' onChange={setParameter}/>
+                    </Form2.Group>
 
-                    <Form.Group controlId="formName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Name" value = {product.name} name = 'name' onChange={setParameter} />
-                    </Form.Group>
+                    <Form2.Group controlId="formName">
+                        <Form2.Label>Name</Form2.Label>
+                        <Form2.Control type="text" placeholder="Name" value = {product.name} name = 'name' onChange={setParameter} />
+                    </Form2.Group>
                     
 
-                    <Form.Group controlId="formCategory">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Control type='text' placeholder="Category" value= {product.category} name = 'category' onChange={setParameter}/>
-                    </Form.Group>
+                    <Form2.Group controlId="formCategory">
+                        <Form2.Label>Category</Form2.Label>
+                        <Form2.Control type='text' placeholder="Category" value= {product.category} name = 'category' onChange={setParameter}/>
+                    </Form2.Group>
 
-                    <Form.Group controlId="formPrice">
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control type = 'text' placeholder="Price" value={product.price} name = 'price' onChange={setParameter}/>
-                    </Form.Group>
+                    <Form2.Group controlId="formPrice">
+                        <Form2.Label>Price</Form2.Label>
+                        <Form2.Control type = 'text' placeholder="Price" value={product.price} name = 'price' onChange={setParameter}/>
+                    </Form2.Group>
 
-                    <Form.Group controlId="formImgUrl">
-                        <Form.Label>Image URL</Form.Label>
-                        <Form.Control type = 'text' placeholder="Image URL" value={product.imgURL} name = 'imgURL' onChange={setParameter}/>
-                    </Form.Group>
+                    <Form2.Group controlId="formImgUrl">
+                        <Form2.Label>Image URL</Form2.Label>
+                        <Form2.Control type = 'text' placeholder="Image URL" value={product.imgURL} name = 'imgURL' onChange={setParameter}/>
+                    </Form2.Group>
 
-                   <Form.Row>
+                   <Form2.Row>
                         <Button variant="primary" type="submit">
                             Guardar
                         </Button>
@@ -200,9 +281,9 @@ const Products = () => {
                         <Button variant="secondary" type="button" onClick={reset}>
                             limpiar
                         </Button>
-                   </Form.Row>
+                   </Form2.Row>
                     
-                </Form>
+                </Form2>
 
                 {/* <table className="table">
                     

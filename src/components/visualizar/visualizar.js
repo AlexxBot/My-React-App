@@ -5,6 +5,8 @@ import { LoginContext } from '../../context/login-context'
 
 import { URL_SOCKET } from '../../global'
 
+import Mensaje from './mensaje'
+
 
 const socket = io.connect(URL_SOCKET)
 
@@ -27,7 +29,13 @@ const Visualizar = () => {
     const userVideo = useRef()
     const connectionRef = useRef()
 
+    const [mensaje, setMensaje] = useState('')
+    const [mensajes, setMensajes] = useState([])
+
+    const [lista, setLista] = useState([])
+
     useEffect(() => {
+        
         /* navigator.mediaDevices.getUserMedia({video: video, audio: audio}).then((stream) => {
             setStream(stream)
             myVideo.current.srcObject = stream
@@ -44,6 +52,19 @@ const Visualizar = () => {
             //console.log('se esta recibiendo stream de ', data.from)
             setStreamerSignal(data.signal)
         })
+
+        socket.on('receiveMessage', (m) => {
+            
+            //console.log(lista)
+            //const newList = [...lista, m]
+            setLista((prev) => [...prev, m])
+
+            
+        })
+
+        
+
+    
 
     }, [])
 
@@ -85,6 +106,18 @@ const Visualizar = () => {
 
     }
 
+    const fillMensaje = (e) => {
+
+        //console.log('aqui se esta llenado el mensaje ', mensaje)
+        setMensaje(e.target.value)
+    }
+
+    const enviarMensaje = (e) => {
+        //e.preventValue()
+        socket.emit('sendMensaje',{from: socketId, payload: mensaje})
+        setMensaje('')
+    }
+
     return (
         <>
             <h1 style={{ textAlign: "center", color: '#fff' }}>Streaming</h1>
@@ -106,6 +139,18 @@ const Visualizar = () => {
                 </div>
                 <div className = 'chat-container'>
                     <h2>Chat</h2>
+                    {
+                        lista.map((message) => 
+                            <Mensaje key={message.id} from ={message.from}  mensaje = {message.mensaje}/>
+                        )
+
+                        
+                    }
+                    <div>
+                    <input type='text' value={mensaje} onChange={fillMensaje}/>
+                    <button onClick = {enviarMensaje}>Enviar</button>
+                    </div>
+                    
                 </div>
                 
             </div>
