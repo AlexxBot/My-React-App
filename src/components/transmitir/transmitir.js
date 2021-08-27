@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import Peer from 'simple-peer'
-import io from 'socket.io-client' 
+import io from 'socket.io-client'
 import { LoginContext } from '../../context/login-context'
 
 import { URL_SOCKET } from '../../global'
@@ -10,7 +10,24 @@ const socket = io.connect(URL_SOCKET)
 
 const peerConfig =
 {
+
     'iceServers': [
+        {
+            'urls': 'stun:stun.l.google.com:19302'
+        },
+        {
+            'urls': 'turn:192.158.29.39:3478?transport=udp',
+            'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+            'username': '28224511:1379330808'
+        },
+        {
+            'urls': 'turn:192.158.29.39:3478?transport=tcp',
+            'credential': 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+            'username': '28224511:1379330808'
+        }
+    ]
+
+    /* 'iceServers': [
         { urls: 'stun:stun01.sipphone.com' },
         { urls: 'stun:stun.ekiga.net' },
         { urls: 'stun:stun.fwdnet.net' },
@@ -45,7 +62,7 @@ const peerConfig =
             credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
             username: '28224511:1379330808'
         }
-    ]
+    ] */
 }
 
 
@@ -60,16 +77,16 @@ const Transmitir = () => {
     const [mensajes, setMensajes] = useState([])
 
 
-    
 
-    const [room , setRoom] = useState('')
+
+    const [room, setRoom] = useState('')
 
     const myVideo = useRef()
     //const userVideo = useRef()
     const connectionRef = useRef()
 
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({video: video, audio: audio}).then((stream) => {
+        navigator.mediaDevices.getUserMedia({ video: video, audio: audio }).then((stream) => {
             setStream(stream)
             myVideo.current.srcObject = stream
         })
@@ -80,12 +97,12 @@ const Transmitir = () => {
         })
 
         socket.on('receiveMessage', (mensaje) => {
-            const nuevosMensajes = [...mensajes, {from: mensaje.from, mensaje: mensaje.payload}]
+            const nuevosMensajes = [...mensajes, { from: mensaje.from, mensaje: mensaje.payload }]
 
             setMensajes(nuevosMensajes)
         })
 
-        
+
 
     }, [])
 
@@ -133,23 +150,23 @@ const Transmitir = () => {
     return (
         <>
             <h1 style={{ textAlign: "center", color: '#fff' }}>Streaming</h1>
-            <div className = 'container-stream'>
-                <div className = 'video-container'>
+            <div className='container-stream'>
+                <div className='video-container'>
                     <h2>Video</h2>
                     <div className='video'>
-                        {stream && <video playsInline muted ref={myVideo} autoPlay style = {{width:"600px", height:"400px"}}/>}
+                        {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: "600px", height: "400px" }} />}
                     </div>
 
-                    <div className = 'settings'>
+                    <div className='settings'>
                         <label>Room</label>
-                        <input type='text' onChange = {ConfigurarRoom} value = {room}/>
-                        <button onClick = {ConfigurarAudio}>{audio?'Deshabilitar Audio': 'Habilitar Audio'}</button>
-                        <button onClick = {ConfigurarVideo}>{video?'Deshabilitar Video': 'Habilitar Video'}</button>
+                        <input type='text' onChange={ConfigurarRoom} value={room} />
+                        <button onClick={ConfigurarAudio}>{audio ? 'Deshabilitar Audio' : 'Habilitar Audio'}</button>
+                        <button onClick={ConfigurarVideo}>{video ? 'Deshabilitar Video' : 'Habilitar Video'}</button>
 
-                        <button onClick = {IniciarTransmision}> Transmitir</button>
+                        <button onClick={IniciarTransmision}> Transmitir</button>
                     </div>
                 </div>
-                <div className = 'chat-container'>
+                <div className='chat-container'>
                     <h2>Chat</h2>
 
                     {
@@ -162,9 +179,9 @@ const Transmitir = () => {
                     }
 
                 </div>
-                
+
             </div>
-            
+
         </>
     )
 }
