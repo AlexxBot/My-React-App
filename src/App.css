@@ -1,10 +1,10 @@
 .form{
-  display: center;
+  display: left;
   margin: 10px;
   border: 2px solid gray;
   position: absolute;
-  top: 40%;
-  left: 40%;
+  top: 10%;
+  left: 10%;
   border-radius: 5px;
 
 
@@ -15,8 +15,8 @@
   border-radius: 5px;
   border: none;
   position: relative;
-  top: 30%;
-  left: 30%;
+  top: 10%;
+  left: 10%;
 
 }
 

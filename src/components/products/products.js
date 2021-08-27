@@ -178,7 +178,7 @@ const Products = () => {
                     <br/>
                 </form> */}
 
-                <Formik 
+                {/* <Formik 
                 
                     initialValues={{
                         name: '',
@@ -214,7 +214,7 @@ const Products = () => {
                             handleBlur,
                             handleSubmit,
                             isSubmitting,
-                            /* and other goodies */
+                            
                         }) => (
                 
 
@@ -243,7 +243,7 @@ const Products = () => {
                         </Form>        
                         )}
 
-                </Formik>
+                </Formik> */}
 
                 <Form2 onSubmit={saveProduct} className='formularioProduct'>
                     
